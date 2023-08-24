@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"json-server --watch --port 4200 db.json\" \"next dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "npx prettier . --write"
+    "prettier": "npx prettier . --write",
+    "start-server": "json-server --watch --port 4200 db.json",
+    "start-app": "next dev"
   },
   "dependencies": {
     "@types/node": "20.5.1",
