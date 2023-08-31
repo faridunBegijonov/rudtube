@@ -4,4 +4,5 @@ export interface ITextField {
   style?: string
   icon?: boolean
   callBackFn: (value: string) => void
+  autocomplete?: boolean
 }

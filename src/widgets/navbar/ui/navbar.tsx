@@ -1,14 +1,18 @@
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { IoCreate } from 'react-icons/io5'
-import { IconButton, TextField } from '@/shared'
+import { setValueStore } from '@/app/store/slice'
+import { IconButton, TextField, useAppDispatch } from '@/shared'
 import { INavbarType } from '../type'
 
 export const Navbar: FC<INavbarType> = ({ callBackFn }: INavbarType) => {
   const [value, setValue] = useState<string>('')
   const [showSideBar, setShowSideBar] = useState<boolean>(true)
+  const width = window.innerWidth
+  const dispatch = useAppDispatch()
 
   const handleToggle = () => {
     setShowSideBar((prev) => !prev)
@@ -16,21 +20,25 @@ export const Navbar: FC<INavbarType> = ({ callBackFn }: INavbarType) => {
   }
   const callBackTextField = (value: string) => {
     setValue(value)
+    dispatch(setValueStore(value))
   }
+
   return (
     <nav
-      className={`flex items-center justify-between ${
+      className={`flex items-center pr-2 md:justify-between ${
         showSideBar ? 'ml-auto' : 'w-full'
       }`}
     >
-      <div onClick={() => handleToggle()}>
-        <IconButton style="w-[40px] h-[40px]">
-          <FaBarsStaggered style={{ fontSize: '20px' }} />
-        </IconButton>
-      </div>
+      {width <= 1024 && (
+        <div onClick={() => handleToggle()}>
+          <IconButton style="w-[40px] h-[40px]">
+            <FaBarsStaggered style={{ fontSize: '20px' }} />
+          </IconButton>
+        </div>
+      )}
       <TextField
         callBackFn={(value) => callBackTextField(value)}
-        style="md:w-[550px] ml-4 md:mr-0"
+        style="md:w-[550px] ml-2 md:ml-4 xl:ml-0 md:mr-0"
         icon={true}
         type="search"
         placeholder="Введите запрос"

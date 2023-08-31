@@ -17,7 +17,7 @@ export const Sidebar: FC<ISidebarType> = ({
     <aside
       className={`${
         isShow && 'w-[80%] md:w-[40%] lg:w-[30%] xl:w-[20%]'
-      } fixed z-40 bg-[#0f0f0fff] md:overflow-auto overflow-y-scroll`}
+      } fixed left-0 top-0 bottom-0 z-40 bg-[#0f0f0fff] md:overflow-auto overflow-y-scroll`}
     >
       {isShow && (
         <div className="w-full p-4 h-screen">
@@ -35,12 +35,23 @@ export const Sidebar: FC<ISidebarType> = ({
             )}
           </div>
           {sidebarModel.map((item) => {
-            return <Item key={item.href} {...item} />
+            return (
+              <div
+                key={item.href}
+                onClick={() => (width <= 1024 ? callBackFn : null)}
+              >
+                <Item {...item} />
+              </div>
+            )
           })}
           {width <= 600 && (
             <div>
-              <Item href="/create" title="Создать" Icon={IoCreate} />
-              <Item href="/profile" title="Профиль" Icon={FaUser} />
+              <div onClick={callBackFn}>
+                <Item href="/create" title="Создать" Icon={IoCreate} />
+              </div>
+              <div onClick={callBackFn}>
+                <Item href="/profile" title="Профиль" Icon={FaUser} />
+              </div>
             </div>
           )}
 

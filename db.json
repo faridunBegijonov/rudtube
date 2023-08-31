@@ -1,9 +1,132 @@
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "videos": [
+    {
+      "id": 1,
+      "img": "/assets/inna.webp",
+      "category": "Музыка",
+      "title": "INNA - Nirvana | Official Music Video",
+      "likes": 959000,
+      "view": 121000000
+    },
+    {
+      "id": 2,
+      "img": "/assets/2.webp",
+      "category": "Музыка",
+      "title": "Shabnam Surayo - Habibi ( Official Music Video 2021 )",
+      "likes": 110000,
+      "view": 1700000
+    },
+    {
+      "id": 3,
+      "img": "/assets/3.webp",
+      "category": "Музыка",
+      "title": "ARASH feat Helena - Dooset Daram Kamro Remix",
+      "likes": 65,
+      "view": 526
+    },
+    {
+      "id": 4,
+      "img": "/assets/4.webp",
+      "category": "Ansor Media",
+      "title": "ДЖИБРИЛЬ почему он особенный для АЛЛАХА",
+      "likes": 12000,
+      "view": 131000
+    },
+    {
+      "id": 5,
+      "img": "/assets/5.webp",
+      "category": "UFC",
+      "title": "Большое интервью Хабиба: Конор, политика, мудрость отца, гендеры, менталитет, Майкл Джордан...",
+      "likes": 16000,
+      "view": 818000
+    },
+    {
+      "id": 6,
+      "img": "/assets/6.webp",
+      "category": "Музыка",
+      "title": "Arash & Helena - Broken Angel (Azimov remix)",
+      "likes": 7700,
+      "view": 691000
+    },
+    {
+      "id": 7,
+      "img": "/assets/7.webp",
+      "category": "Видео уроки",
+      "title": "React для НОВИЧКОВ [2023]: первый проект на React JS | Как запустить приложение на React?",
+      "likes": 578,
+      "view": 10000
+    },
+    {
+      "id": 8,
+      "img": "/assets/8.webp",
+      "category": "Музыка",
+      "title": "NEJ - PARO | PLAYZER LIVE SESSION #22",
+      "likes": 234000,
+      "view": 12000000
+    },
+    {
+      "id": 9,
+      "img": "/assets/9.webp",
+      "category": "Музыка",
+      "title": "SONYA - Джованна (Cover)",
+      "likes": 72000,
+      "view": 2600000
+    },
+    {
+      "id": 10,
+      "img": "/assets/10.webp",
+      "category": "Музыка",
+      "title": "КЛИП / HASAN MADUDOV - Эйфория",
+      "likes": 7400,
+      "view": 918000
+    },
+    {
+      "id": 11,
+      "img": "/assets/11.webp",
+      "category": "Музыка",
+      "title": "Зулайхо Махмадшоева - Камар борик / Zulaykho Mahmadshoeva - Kamar Borik (Audio 2020)",
+      "likes": 81005,
+      "view": 2700000
+    },
+    {
+      "id": 12,
+      "img": "/assets/12.webp",
+      "category": "Музыка",
+      "title": "SEYA - Papito Chocolata",
+      "likes": 261000,
+      "view": 41000000
+    },
+    {
+      "id": 13,
+      "img": "/assets/13.webp",
+      "category": "Музыка",
+      "title": "MONIK - Qa Koke (Official Video)",
+      "likes": 130000,
+      "view": 1500000
+    },
+    {
+      "id": 14,
+      "img": "/assets/14.webp",
+      "category": "Разные",
+      "title": "КАК ВСЕГДА ПАХНУТЬ ПРИЯТНО - МУЖСКОЙ УХОД",
+      "likes": 45000,
+      "view": 820000
+    },
+    {
+      "id": 15,
+      "img": "/assets/15.webp",
+      "category": "Музыка",
+      "title": "ZAKIYA Сад бача ай пушти ма ҷангай 2023",
+      "likes": 746,
+      "view": 88000
+    },
+    {
+      "id": 16,
+      "img": "/assets/16.webp",
+      "category": "Путешествие",
+      "title": "Таджикистан - УЛИЧНАЯ ЕДА | Что Едят Таджики? Душанбе Street Food",
+      "likes": 16000,
+      "view": 444000
+    }
+  ]
 }
