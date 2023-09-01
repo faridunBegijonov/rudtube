@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { FiltersBar } from '@/features'
 import { Card } from '@/entities'
@@ -8,6 +8,10 @@ import { IVideoType, useGetAll } from '@/shared'
 export default function Home() {
   const [data, isLoading] = useGetAll()
   const [category, setCategory] = useState<string>('Все')
+
+  useEffect(() => {
+    document.title = 'YouTube'
+  }, [])
 
   const handleCategory = (category: string) => {
     setCategory(category)

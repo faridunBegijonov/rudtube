@@ -49,12 +49,8 @@ export const Sidebar: FC<ISidebarType> = ({
               <div onClick={callBackFn}>
                 <Item href="/create" title="Создать" Icon={IoCreate} />
               </div>
-              <div onClick={callBackFn}>
-                <Item href="/profile" title="Профиль" Icon={FaUser} />
-              </div>
             </div>
           )}
-
           <div className="h-[1px] w-full bg-white/10" />
           <p className="px-4 text-sm text-white/50 my-4">
             О сервисе Прессе Авторские права Связаться с нами Авторам

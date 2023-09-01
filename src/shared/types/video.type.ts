@@ -4,5 +4,5 @@ export interface IVideoType {
   category: string
   title: string
   likes: number
-  view: 156305
+  view: number
 }

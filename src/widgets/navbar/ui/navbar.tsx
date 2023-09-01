@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { FC, useState } from 'react'
-import { FaUser } from 'react-icons/fa'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { IoCreate } from 'react-icons/io5'
 import { setValueStore } from '@/app/store/slice'
@@ -46,15 +45,6 @@ export const Navbar: FC<INavbarType> = ({ callBackFn }: INavbarType) => {
         <Link href="/create">
           <IconButton style="w-[40px] h-[40px]" isPopup={true} title="Создать">
             <IoCreate style={{ fontSize: '20px' }} />
-          </IconButton>
-        </Link>
-        <Link href="/profile">
-          <IconButton
-            style="mx-4 w-[40px] h-[40px]"
-            isPopup={true}
-            title="Профиль"
-          >
-            <FaUser style={{ fontSize: '20px' }} />
           </IconButton>
         </Link>
       </div>

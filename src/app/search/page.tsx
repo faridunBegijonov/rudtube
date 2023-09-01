@@ -1,4 +1,5 @@
 'use client'
+import { useEffect } from 'react'
 import { CardSearch } from '@/entities'
 import { filterByTitle, IVideoType, useAppSelector, useGetAll } from '@/shared'
 
@@ -6,6 +7,10 @@ export default function Page() {
   const [data, isLoading] = useGetAll()
   const { value } = useAppSelector((state) => state.search)
   const searchVideo = filterByTitle(Array.isArray(data) ? data : [], value)
+
+  useEffect(() => {
+    document.title = 'YouTube'
+  }, [])
   return (
     <div className="my-4">
       {searchVideo.length === 0 ? (

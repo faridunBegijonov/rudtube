@@ -1,28 +1,34 @@
 'use client'
 import Image from 'next/image'
 import { useEffect } from 'react'
-import { AiFillLike } from 'react-icons/ai'
+import {
+  AiFillLike,
+  AiOutlineCloudDownload,
+  AiOutlineDelete,
+} from 'react-icons/ai'
 import { BiDownArrowCircle } from 'react-icons/bi'
 import { BsFillPlayCircleFill } from 'react-icons/bs'
 import { toast, ToastContainer } from 'react-toastify'
-import { addToSaves } from '@/app/store/slice'
+import { addToSaves, deleteToSaves } from '@/app/store/slice'
 import { CardSearch } from '@/entities'
 import {
   IconButton,
   IVideoType,
   kFormatter,
   useAppDispatch,
+  useAppSelector,
   useGetAll,
   useGetById,
 } from '@/shared'
 
 export default function Page(props: any) {
   const [data] = useGetById(props.params.id)
-
   const [dataAll] = useGetAll()
-
+  const { saves } = useAppSelector((state) => state.saves)
+  const isSave = saves.some(
+    (video: IVideoType) => video.id === +props.params.id
+  )
   const dispatch = useAppDispatch()
-
   const similar = dataAll
     .filter((video: IVideoType) => {
       return video.category === data.category
@@ -33,8 +39,8 @@ export default function Page(props: any) {
     document.title = data?.title
   }, [data?.id])
 
-  const notify = () =>
-    toast('Успешно добавлено', {
+  const notify = (title: string) =>
+    toast(title, {
       position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
@@ -42,9 +48,15 @@ export default function Page(props: any) {
       theme: 'dark',
     })
 
-  const addSaves = () => {
-    dispatch(addToSaves(data))
-    notify()
+  const addSaves = (type: 'save' | 'delete') => {
+    if (type === 'save') {
+      dispatch(addToSaves(data))
+      notify('Успешно добавлено')
+      return
+    }
+
+    dispatch(deleteToSaves(data))
+    notify('Успешно удалено')
   }
   return (
     <>
@@ -72,14 +84,25 @@ export default function Page(props: any) {
             <p className="text-sm md:text-[16px]">
               {kFormatter(data?.view)} просмотров
             </p>
+
             <div className="flex items-center">
+              {!isSave ? (
+                <button onClick={() => addSaves('save')} className="mr-4">
+                  <IconButton title="Сохранить" isPopup={true}>
+                    <AiOutlineCloudDownload style={{ fontSize: '20px' }} />
+                  </IconButton>
+                </button>
+              ) : (
+                <button onClick={() => addSaves('delete')} className="mr-4">
+                  <IconButton title="Удалить из сохроненое" isPopup={true}>
+                    <AiOutlineDelete style={{ fontSize: '20px' }} />
+                  </IconButton>
+                </button>
+              )}
               <IconButton isPopup={true} title="Понравится">
                 <AiFillLike style={{ fontSize: '20px' }} />
               </IconButton>
               <p className="ml-1">{kFormatter(data?.likes)} лайк</p>
-              <button onClick={addSaves} className="ml-4">
-                Сохранить
-              </button>
             </div>
           </div>
           <h2 className="text-white/70">Каментари....</h2>
