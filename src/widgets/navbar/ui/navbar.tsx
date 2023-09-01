@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { FaBarsStaggered } from 'react-icons/fa6'

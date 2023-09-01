@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { Navbar, Sidebar } from '@/widgets'
 import favicon from './icon.svg'
 import { store } from './store'
+import 'react-toastify/ReactToastify.min.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

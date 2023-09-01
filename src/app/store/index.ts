@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { search } from './slice'
+import { saves, search } from './slice'
 
 export const store = configureStore({
   reducer: {
     search: search.reducer,
+    saves: saves.reducer,
   },
 })
 

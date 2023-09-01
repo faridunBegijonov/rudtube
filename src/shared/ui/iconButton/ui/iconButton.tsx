@@ -29,7 +29,7 @@ export const IconButton: FC<IIconButtonType> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute z-40 inline-block p-2 bg-white/50 rounded-[4px] top-[50px] left-[50%] translate-x-[-50%] text-sm"
+            className="absolute z-40 inline-block p-2 bg-white/30 rounded-[4px] top-[50px] left-[50%] translate-x-[-50%] text-sm"
           >
             {title}
           </motion.span>

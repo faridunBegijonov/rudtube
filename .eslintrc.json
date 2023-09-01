@@ -9,7 +9,7 @@
   ],
   "plugins": [],
   "rules": {
-    "max-len": ["error", { "code": 180, "ignoreUrls": true }],
+    "max-len": ["error", { "code": 180 }],
     "import/order": "warn",
     "import/no-internal-modules": "warn",
     "boundaries/element-types": "warn"

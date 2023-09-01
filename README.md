@@ -1,4 +1,5 @@
 ## RudTube
+
 #### Приложение для просмотра разных видео
 
 ```bash
@@ -10,6 +11,7 @@ npm insatll
 ```
 
 ### Используемые библиотеки
+
 - react js
 - next js
 - typescript
@@ -18,5 +20,4 @@ npm insatll
 - tailwindcss
 - axios
 - jsonserver
-- fsd 
-
+- fsd
