@@ -1,4 +1,5 @@
 'use client'
+import axios from 'axios'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import {
@@ -6,10 +7,10 @@ import {
   AiOutlineCloudDownload,
   AiOutlineDelete,
 } from 'react-icons/ai'
-import { BiDownArrowCircle } from 'react-icons/bi'
 import { BsFillPlayCircleFill } from 'react-icons/bs'
+import { useMutation } from 'react-query'
 import { toast, ToastContainer } from 'react-toastify'
-import { addToSaves, deleteToSaves } from '@/app/store/slice'
+import { deleteToSaves, fetchVideoById } from '@/app/store/slice'
 import { CardSearch } from '@/entities'
 import {
   IconButton,
@@ -48,9 +49,21 @@ export default function Page(props: any) {
       theme: 'dark',
     })
 
+  const URL = 'http://localhost:4200'
+
+  const { mutate } = useMutation({
+    mutationFn: () => {
+      return axios.patch(`${URL}/videos/${data?.id}`, {
+        likes: (data.likes += 1),
+      })
+    },
+  })
+
   const addSaves = (type: 'save' | 'delete') => {
     if (type === 'save') {
-      dispatch(addToSaves(data))
+      dispatch(fetchVideoById(data?.id))
+      dispatch(fetchVideoById(data.id))
+
       notify('Успешно добавлено')
       return
     }
@@ -58,9 +71,10 @@ export default function Page(props: any) {
     dispatch(deleteToSaves(data))
     notify('Успешно удалено')
   }
+
   return (
     <>
-      <div className="lg:flex mt-4 md:mt-8">
+      <div className="lg:flex mt-4 p-10 md:mt-8">
         <div className="w-full lg:w-[60%]">
           <div className="cursor-pointer relative">
             <Image
@@ -87,21 +101,23 @@ export default function Page(props: any) {
 
             <div className="flex items-center">
               {!isSave ? (
-                <button onClick={() => addSaves('save')} className="mr-4">
+                <div onClick={() => addSaves('save')} className="mr-4">
                   <IconButton title="Сохранить" isPopup={true}>
                     <AiOutlineCloudDownload style={{ fontSize: '20px' }} />
                   </IconButton>
-                </button>
+                </div>
               ) : (
-                <button onClick={() => addSaves('delete')} className="mr-4">
+                <div onClick={() => addSaves('delete')} className="mr-4">
                   <IconButton title="Удалить из сохроненое" isPopup={true}>
                     <AiOutlineDelete style={{ fontSize: '20px' }} />
                   </IconButton>
-                </button>
+                </div>
               )}
-              <IconButton isPopup={true} title="Понравится">
-                <AiFillLike style={{ fontSize: '20px' }} />
-              </IconButton>
+              <div onClick={async () => await mutate()}>
+                <IconButton isPopup={true} title="Понравится">
+                  <AiFillLike style={{ fontSize: '20px' }} />
+                </IconButton>
+              </div>
               <p className="ml-1">{kFormatter(data?.likes)} лайк</p>
             </div>
           </div>

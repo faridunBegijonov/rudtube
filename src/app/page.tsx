@@ -1,37 +1,53 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { useQuery } from 'react-query'
+import { useEffect, useRef, useState, UIEvent } from 'react'
+import { fetchVideos } from '@/app/store/slice/getVideos'
 import { FiltersBar } from '@/features'
 import { Card } from '@/entities'
-import { IVideoType, useGetAll } from '@/shared'
+import { IVideoType, Skeleton, useAppDispatch, useAppSelector } from '@/shared'
 
 export default function Home() {
-  const [data, isLoading] = useGetAll()
-  const [category, setCategory] = useState<string>('Все')
+  const { videos: data, status: isLoading } = useAppSelector(
+    (state) => state.getVideos
+  )
+  const dispatch = useAppDispatch()
+  const isStoppedFetchMore = useRef<boolean>(false)
+  const pagination = useRef<number>(1)
 
   useEffect(() => {
     document.title = 'YouTube'
+    dispatch(fetchVideos(pagination.current))
   }, [])
 
-  const handleCategory = (category: string) => {
-    setCategory(category)
-  }
+  const fetchMore = async (event: UIEvent<HTMLDivElement>) => {
+    const { scrollHeight, scrollTop, clientHeight } =
+      event.target as HTMLDivElement
 
-  const filtersVideo = () => {
-    if (Array.isArray(data)) {
-      if (category === 'Все') return data
-      return data?.filter((video: IVideoType) => {
-        return video.category === category
-      })
+    if (isStoppedFetchMore.current) {
+      return
+    }
+
+    const scrollCoordinates = scrollHeight - (scrollTop + clientHeight)
+
+    if (scrollCoordinates <= 100) {
+      pagination.current += 1
+      isStoppedFetchMore.current = true
+
+      const { payload } = await dispatch(fetchVideos(pagination.current))
+      if (Array.isArray(payload) && !payload.length) {
+        isStoppedFetchMore.current = false
+      }
     }
   }
 
   return (
-    <div className="mt-2 mb-4">
-      <FiltersBar category={category} callBackFn={handleCategory} />
+    <div
+      onScroll={fetchMore}
+      className="overflow-y-scroll scroll-page p-4 h-screen pt-16 pb-4"
+    >
+      <FiltersBar />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 gap-4">
-        {Array.isArray(filtersVideo()) &&
-          filtersVideo()?.map((item: IVideoType) => {
+        {Array.isArray(data) &&
+          data?.map((item: IVideoType) => {
             return <Card key={item.id} {...item} />
           })}
       </div>

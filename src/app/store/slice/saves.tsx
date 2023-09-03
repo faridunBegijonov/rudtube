@@ -1,7 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { getLocalStorage, IVideoType, setLocalStorage } from '@/shared'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
+import {
+  getLocalStorage,
+  IVideoType,
+  setLocalStorage,
+  useGetAll,
+} from '@/shared'
 
 const savesLocal = getLocalStorage('saves')
+export const fetchVideoById = createAsyncThunk(
+  'video/fetchById',
+  async (id: number) => {
+    const response = await axios.get<IVideoType>(
+      `http://localhost:4200/videos/${id}`
+    )
+    return response.data
+  }
+)
 
 interface ISaves {
   saves: IVideoType[]
@@ -15,18 +30,17 @@ export const saves = createSlice({
   name: 'saves',
   initialState,
   reducers: {
-    addToSaves: (state, { payload }) => {
-      const isVideo = state.saves.some((video) => video.id === payload.id)
-      if (!isVideo) {
-        state.saves.push(payload)
-        setLocalStorage('saves', state.saves)
-      }
-    },
     deleteToSaves: (state, { payload }) => {
       state.saves = state.saves.filter((video) => video.id !== payload.id)
       setLocalStorage('saves', state.saves)
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchVideoById.fulfilled, (state, { payload }) => {
+      state.saves.push(payload)
+      setLocalStorage('saves', state.saves)
+    })
+  },
 })
 
-export const { addToSaves, deleteToSaves } = saves.actions
+export const { deleteToSaves } = saves.actions

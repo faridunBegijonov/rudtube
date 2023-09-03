@@ -9,7 +9,7 @@ export const useGetAll = (): [data: IVideoType[], isLoading: boolean] => {
     return res.data
   })
   if (!Array.isArray(data)) {
-    return [[] as IVideoType[], false]
+    return [[] as IVideoType[], isLoading]
   }
   return [data, isLoading]
 }

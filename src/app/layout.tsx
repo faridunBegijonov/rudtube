@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <main className="flex">
                 <Sidebar callBackFn={handleSidebar} isShow={showSidebar} />
                 <div
-                  className={`p-4 ${
+                  className={`${
                     showSidebar
                       ? `${width <= 1024 ? 'w-full' : 'w-[80%] ml-auto'}`
                       : 'w-full'

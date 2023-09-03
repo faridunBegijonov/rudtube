@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
@@ -13,10 +14,20 @@ export const CardSearch: FC<IVideoType> = ({
   title,
 }: IVideoType) => {
   const [cover, setCover] = useState(false)
+  const URL = 'http://localhost:4200'
+
+  const changeFn = async () => {
+    await axios.patch(`${URL}/videos/${id}`, {
+      view: (view += 1),
+    })
+  }
   return (
     <Link
       onMouseOver={() => setCover(true)}
       onMouseOut={() => setCover(false)}
+      onClick={async () => {
+        await changeFn()
+      }}
       href={`/view/${id}`}
       className="md:flex items-center"
     >

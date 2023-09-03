@@ -10,3 +10,14 @@ export const useCreate = (data: IVideoType) => {
     },
   })
 }
+
+export const usePatch = (id: number, data: IVideoType) => {
+  return useMutation({
+    mutationFn: () => {
+      return axios.patch(`${URL}/videos/${id}`, {
+        ...data,
+        view: data.view,
+      })
+    },
+  })
+}

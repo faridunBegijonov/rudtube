@@ -12,7 +12,7 @@ export default function Page() {
     document.title = 'YouTube'
   }, [])
   return (
-    <div className="my-4">
+    <div className="my-4 pt-16 p-4">
       {searchVideo.length === 0 ? (
         <span>Нечего не найдено....</span>
       ) : (

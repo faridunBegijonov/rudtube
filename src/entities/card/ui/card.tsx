@@ -1,8 +1,9 @@
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { BsFillPlayCircleFill } from 'react-icons/bs'
-import { IVideoType, kFormatter } from '@/shared'
+import { IVideoType, kFormatter, usePatch } from '@/shared'
 
 export const Card: FC<IVideoType> = ({
   id,
@@ -13,10 +14,21 @@ export const Card: FC<IVideoType> = ({
   category,
 }: IVideoType) => {
   const [cover, setCover] = useState(false)
+  const URL = 'http://localhost:4200'
+
+  const changeFn = async () => {
+    await axios.patch(`${URL}/videos/${id}`, {
+      view: (view += 1),
+    })
+  }
+
   return (
     <Link
       onMouseOver={() => setCover(true)}
       onMouseOut={() => setCover(false)}
+      onClick={async () => {
+        await changeFn()
+      }}
       href={`/view/${id}`}
     >
       <div className="relative">

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { setValue } from '@/app/store/slice'
 import { useAppDispatch } from '@/shared'
 import { ITextField } from '../type'
 

@@ -5,20 +5,16 @@ import { IIconButtonType } from '../type'
 
 export const IconButton: FC<IIconButtonType> = ({
   children,
-  style,
+  style = '',
   title,
   isPopup,
 }: IIconButtonType) => {
   const [showPopup, setShowPopup] = useState<boolean>(false)
-  const handlePopup = () => {
-    setShowPopup((prev) => !prev)
-  }
   return (
     <div className="relative">
       <button
-        onMouseOver={handlePopup}
-        onMouseOut={handlePopup}
-        type="button"
+        onMouseOver={() => setShowPopup(true)}
+        onMouseOut={() => setShowPopup(false)}
         className={`${style} rounded-full p-2 flex items-center justify-center cursor-pointer transition-colors hover:bg-white/10`}
       >
         {children}
