@@ -1,9 +1,10 @@
 import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useEffect, useMemo, useState } from 'react'
+import { FC, useState } from 'react'
 import { BsFillPlayCircleFill } from 'react-icons/bs'
-import { IVideoType, kFormatter, usePatch } from '@/shared'
+import { addToHistory } from '@/app/store/slice'
+import { IVideoType, kFormatter, useAppDispatch } from '@/shared'
 
 export const Card: FC<IVideoType> = ({
   id,
@@ -14,6 +15,7 @@ export const Card: FC<IVideoType> = ({
   category,
 }: IVideoType) => {
   const [cover, setCover] = useState(false)
+  const dispatch = useAppDispatch()
   const URL = 'http://localhost:4200'
 
   const changeFn = async () => {
@@ -28,6 +30,7 @@ export const Card: FC<IVideoType> = ({
       onMouseOut={() => setCover(false)}
       onClick={async () => {
         await changeFn()
+        dispatch(addToHistory({ id, title, img, view, likes, category }))
       }}
       href={`/view/${id}`}
     >

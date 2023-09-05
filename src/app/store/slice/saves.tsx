@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import {
-  getLocalStorage,
-  IVideoType,
-  setLocalStorage,
-  useGetAll,
-} from '@/shared'
+import { getLocalStorage, IVideoType, setLocalStorage } from '@/shared'
 
 const savesLocal = getLocalStorage('saves')
 export const fetchVideoById = createAsyncThunk(

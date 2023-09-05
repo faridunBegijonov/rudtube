@@ -1,10 +1,16 @@
+import axios from 'axios'
 import { FC, useEffect, useState } from 'react'
-import { fetchVideos, filterVideo } from '@/app/store/slice/getVideos'
-import { filter, IVideoType, useAppDispatch, useGetAll } from '@/shared'
+import { useQuery } from 'react-query'
+import { filterVideo } from '@/app/store/slice/getVideos'
+import { filter, IVideoType, useAppDispatch } from '@/shared'
 import { IFiltersBarType } from '../type'
 
 export const FiltersBar: FC<IFiltersBarType> = ({}) => {
-  const [data] = useGetAll()
+  const URL = 'http://localhost:4200'
+  const { data, isLoading } = useQuery<IVideoType[]>('getAll', async () => {
+    const res = await axios.get<IVideoType[]>(`${URL}/videos`)
+    return res.data
+  })
   const dispatch = useAppDispatch()
   const [category, setCategory] = useState('Все')
   const categories: string[] = ['Все']
@@ -16,7 +22,10 @@ export const FiltersBar: FC<IFiltersBarType> = ({}) => {
     })
   }
 
-  const filtersVideo = filter(data, category)
+  const filtersVideo = filter(
+    Array.isArray(data) ? data : ([] as IVideoType[]),
+    category
+  )
 
   useEffect(() => {
     dispatch(filterVideo(filtersVideo))

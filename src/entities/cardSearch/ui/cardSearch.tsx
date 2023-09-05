@@ -3,7 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useState } from 'react'
 import { BsFillPlayCircleFill } from 'react-icons/bs'
-import { IVideoType, kFormatter } from '@/shared'
+import { addToHistory } from '@/app/store/slice'
+import { IVideoType, kFormatter, useAppDispatch } from '@/shared'
 
 export const CardSearch: FC<IVideoType> = ({
   id,
@@ -14,6 +15,7 @@ export const CardSearch: FC<IVideoType> = ({
   title,
 }: IVideoType) => {
   const [cover, setCover] = useState(false)
+  const dispatch = useAppDispatch()
   const URL = 'http://localhost:4200'
 
   const changeFn = async () => {
@@ -27,6 +29,7 @@ export const CardSearch: FC<IVideoType> = ({
       onMouseOut={() => setCover(false)}
       onClick={async () => {
         await changeFn()
+        dispatch(addToHistory({ id, view, likes, category, img, title }))
       }}
       href={`/view/${id}`}
       className="md:flex items-center"

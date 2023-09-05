@@ -1,10 +1,16 @@
 'use client'
+import axios from 'axios'
 import { useEffect } from 'react'
+import { useQuery } from 'react-query'
 import { CardSearch } from '@/entities'
-import { filterByTitle, IVideoType, useAppSelector, useGetAll } from '@/shared'
+import { filterByTitle, IVideoType, useAppSelector } from '@/shared'
 
 export default function Page() {
-  const [data, isLoading] = useGetAll()
+  const URL = 'http://localhost:4200/'
+  const { data, isLoading } = useQuery<IVideoType[]>('getAll', async () => {
+    const res = await axios.get<IVideoType[]>(`${URL}/videos`)
+    return res.data
+  })
   const { value } = useAppSelector((state) => state.search)
   const searchVideo = filterByTitle(Array.isArray(data) ? data : [], value)
 

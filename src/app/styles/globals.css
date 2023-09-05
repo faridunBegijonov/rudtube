@@ -30,3 +30,7 @@ body {
 .scroll-page::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.scroll-page::-webkit-scrollbar {
+  width: 5px;
+}

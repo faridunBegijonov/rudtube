@@ -18,7 +18,7 @@ export const fetchVideos = createAsyncThunk(
   'videos/getVideos',
   async (page: number) => {
     const response = await axios.get<IVideoType>(
-      `http://localhost:4200/videos?_page=${page}`
+      `http://localhost:4200/videos?_page=${page}&_limit=15`
     )
     return response.data
   }

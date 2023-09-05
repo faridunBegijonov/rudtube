@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { getVideos } from '@/app/store/slice/getVideos'
-import { saves, search } from './slice'
+import { saves, search, history, getVideos, likes } from './slice'
 
 export const store = configureStore({
   reducer: {
     search: search.reducer,
     saves: saves.reducer,
     getVideos: getVideos.reducer,
+    history: history.reducer,
+    likes: likes.reducer,
   },
 })
 

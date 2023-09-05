@@ -1,7 +1,7 @@
 import { IVideoType } from '@/shared'
 
 export const filter = (arr: IVideoType[], value: string) => {
-  return arr.filter((movie) => movie.category === value)
+  return arr?.filter((movie) => movie.category === value)
 }
 
 export const filterByTitle = (arr: IVideoType[], title: string) => {

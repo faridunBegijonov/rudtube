@@ -31,6 +31,7 @@ export default function Home() {
     if (scrollCoordinates <= 100) {
       pagination.current += 1
       isStoppedFetchMore.current = true
+      console.log('isFetched', pagination.current)
 
       const { payload } = await dispatch(fetchVideos(pagination.current))
       if (Array.isArray(payload) && !payload.length) {
@@ -50,6 +51,7 @@ export default function Home() {
           data?.map((item: IVideoType) => {
             return <Card key={item.id} {...item} />
           })}
+        {isLoading && [1, 2, 3, 4, 5, 6].map((item) => <Skeleton key={item} />)}
       </div>
     </div>
   )
