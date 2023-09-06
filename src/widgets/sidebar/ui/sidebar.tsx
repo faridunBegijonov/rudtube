@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { BsYoutube } from 'react-icons/bs'
-import { FaUser } from 'react-icons/fa'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { IoCreate } from 'react-icons/io5'
 import { IconButton } from '@/shared'

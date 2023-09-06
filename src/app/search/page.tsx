@@ -19,10 +19,11 @@ export default function Page() {
   }, [])
   return (
     <div className="my-4 pt-16 p-4">
-      {searchVideo.length === 0 ? (
+      {searchVideo.length === 0 || value.length === 0 ? (
         <span>Нечего не найдено....</span>
       ) : (
         Array.isArray(searchVideo) &&
+        value.length !== 0 &&
         searchVideo?.map((video: IVideoType) => {
           return (
             <div key={video.id} className="mb-2 last:mb-0">

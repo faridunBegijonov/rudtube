@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import { AiOutlineDownload } from 'react-icons/ai'
 import { useMutation } from 'react-query'
-import { Button, TextField, useCreate } from '@/shared'
+import { Button, TextField } from '@/shared'
 import { ICreateVideoType } from '../type'
 
 export const CreateVideo: FC<ICreateVideoType> = ({

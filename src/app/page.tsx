@@ -40,6 +40,7 @@ export default function Home() {
     }
   }
 
+  console.log(process.env.URL)
   return (
     <div
       onScroll={fetchMore}
